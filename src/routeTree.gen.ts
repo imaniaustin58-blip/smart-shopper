@@ -10,11 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ListRouteImport } from './routes/list'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as TrackerRouteImport } from './routes/tracker'
+import { Route as CompareProductIdRouteImport } from './routes/compare.$productId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ListRoute = ListRouteImport.update({
+  id: '/list',
+  path: '/list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -22,31 +36,66 @@ const SearchRoute = SearchRouteImport.update({
   path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrackerRoute = TrackerRouteImport.update({
+  id: '/tracker',
+  path: '/tracker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareProductIdRoute = CompareProductIdRouteImport.update({
+  id: '/compare/$productId',
+  path: '/compare/$productId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/list': typeof ListRoute
+  '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/tracker': typeof TrackerRoute
+  '/compare/$productId': typeof CompareProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/list': typeof ListRoute
+  '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/tracker': typeof TrackerRoute
+  '/compare/$productId': typeof CompareProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/list': typeof ListRoute
+  '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/tracker': typeof TrackerRoute
+  '/compare/$productId': typeof CompareProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/search'
+  fullPaths:
+    '/' | '/list' | '/profile' | '/search' | '/tracker' | '/compare/$productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/search'
-  id: '__root__' | '/' | '/search'
+  to:
+    '/' | '/list' | '/profile' | '/search' | '/tracker' | '/compare/$productId'
+  id:
+    | '__root__'
+    | '/'
+    | '/list'
+    | '/profile'
+    | '/search'
+    | '/tracker'
+    | '/compare/$productId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ListRoute: typeof ListRoute
+  ProfileRoute: typeof ProfileRoute
   SearchRoute: typeof SearchRoute
+  TrackerRoute: typeof TrackerRoute
+  CompareProductIdRoute: typeof CompareProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +107,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/list': {
+      id: '/list'
+      path: '/list'
+      fullPath: '/list'
+      preLoaderRoute: typeof ListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -65,12 +128,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tracker': {
+      id: '/tracker'
+      path: '/tracker'
+      fullPath: '/tracker'
+      preLoaderRoute: typeof TrackerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare/$productId': {
+      id: '/compare/$productId'
+      path: '/compare/$productId'
+      fullPath: '/compare/$productId'
+      preLoaderRoute: typeof CompareProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ListRoute: ListRoute,
+  ProfileRoute: ProfileRoute,
   SearchRoute: SearchRoute,
+  TrackerRoute: TrackerRoute,
+  CompareProductIdRoute: CompareProductIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
