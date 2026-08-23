@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search as SearchIcon, SearchX, AlertCircle } from "lucide-react";
+import { Search as SearchIcon, SearchX, CircleAlert as AlertCircle } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { ProductCard } from "@/components/ProductCard";
 import { WalmartLiveCard, WalmartLiveError, WalmartLiveLoading } from "@/components/WalmartLiveCard";
@@ -35,7 +35,7 @@ function SearchPage() {
 
   const walmartQuery = useQuery({
     queryKey: ["walmart-search", q],
-    queryFn: () => searchWalmart({ data: { query: q } }),
+    queryFn: () => searchWalmart(q),
     enabled: q.trim().length > 0,
     staleTime: 60_000,
   });

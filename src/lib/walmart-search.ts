@@ -1,5 +1,3 @@
-import { createServerFn } from "@tanstack/react-start";
-import { z } from "zod";
 import type { WalmartLiveResponse, WalmartLiveResult } from "@/data/walmart-types";
 
 interface SerpApiWalmartResult {
@@ -74,51 +72,42 @@ function mapResult(result: SerpApiWalmartResult): WalmartLiveResult {
   };
 }
 
-export const searchWalmart = createServerFn({ method: "GET" })
-  .validator((input: unknown) => {
-    const schema = z.object({ query: z.string().min(1) });
-    return schema.parse(input);
-  })
-  .handler(async ({ data }) => {
-    const supabaseUrl = process.env.VITE_SUPABASE_URL;
-    if (!supabaseUrl) {
-      console.error("VITE_SUPABASE_URL is not configured");
+export async function searchWalmart(query: string): Promise<WalmartLiveResponse> {
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  if (!supabaseUrl) {
+    return {
+      results: [],
+      error: "Live Walmart pricing is temporarily unavailable.",
+    };
+  }
+
+  try {
+    const endpoint = `${supabaseUrl}/functions/v1/walmart-search?query=${encodeURIComponent(query)}`;
+    const response = await fetch(endpoint);
+
+    if (!response.ok) {
       return {
         results: [],
         error: "Live Walmart pricing is temporarily unavailable.",
-      } satisfies WalmartLiveResponse;
+      };
     }
 
-    try {
-      const endpoint = `${supabaseUrl}/functions/v1/walmart-search?query=${encodeURIComponent(data.query)}`;
-      const response = await fetch(endpoint);
+    const json = (await response.json()) as SerpApiWalmartResponse & { error?: string };
 
-      if (!response.ok) {
-        console.error(`Walmart edge function responded with status ${response.status}`);
-        return {
-          results: [],
-          error: "Live Walmart pricing is temporarily unavailable.",
-        } satisfies WalmartLiveResponse;
-      }
-
-      const json = (await response.json()) as SerpApiWalmartResponse & { error?: string };
-
-      if (json.error) {
-        console.error(`Walmart edge function error: ${json.error}`);
-        return {
-          results: [],
-          error: "Live Walmart pricing is temporarily unavailable.",
-        } satisfies WalmartLiveResponse;
-      }
-
-      const results = (json.organic_results ?? []).map(mapResult);
-
-      return { results, error: null } satisfies WalmartLiveResponse;
-    } catch (err) {
-      console.error("Walmart edge function request failed:", err);
+    if (json.error) {
       return {
         results: [],
         error: "Live Walmart pricing is temporarily unavailable.",
-      } satisfies WalmartLiveResponse;
+      };
     }
-  });
+
+    const results = (json.organic_results ?? []).map(mapResult);
+
+    return { results, error: null };
+  } catch {
+    return {
+      results: [],
+      error: "Live Walmart pricing is temporarily unavailable.",
+    };
+  }
+}
