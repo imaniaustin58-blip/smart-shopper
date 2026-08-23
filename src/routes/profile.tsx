@@ -6,12 +6,12 @@ import { useShopping } from "@/lib/shopping-store";
 export const Route = createFileRoute("/profile")({
   head: () => ({
     meta: [
-      { title: "Your Profile — PricePair" },
+      { title: "Your Profile — ShopScout" },
       {
         name: "description",
-        content: "Manage your preferred stores, alert settings and savings summary in PricePair.",
+        content: "Manage your preferred stores, alert settings and savings summary in ShopScout.",
       },
-      { property: "og:title", content: "Your Profile — PricePair" },
+      { property: "og:title", content: "Your Profile — ShopScout" },
       {
         property: "og:description",
         content: "Preferred stores, alerts and savings, all in one place.",

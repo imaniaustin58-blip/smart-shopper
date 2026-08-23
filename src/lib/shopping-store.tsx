@@ -6,7 +6,7 @@ interface StoreState {
 }
 
 const EMPTY: StoreState = { list: [], tracked: [] };
-const KEY = "pricepair.state.v1";
+const KEY = "shopscout.state.v1";
 
 interface StoreCtx extends StoreState {
   toggleList: (id: string) => void;

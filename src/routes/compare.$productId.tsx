@@ -17,11 +17,11 @@ export const Route = createFileRoute("/compare/$productId")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Product unavailable — PricePair" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Product unavailable — ShopScout" }, { name: "robots", content: "noindex" }],
       };
     }
     const { product } = loaderData;
-    const title = `${product.brand} ${product.name} — Walmart vs Target | PricePair`;
+    const title = `${product.brand} ${product.name} — Walmart vs Target | ShopScout`;
     const description = `Compare ${product.brand} ${product.name} prices at Walmart and Target, including price per ${product.offers[0].unitLabel}.`;
     return {
       meta: [

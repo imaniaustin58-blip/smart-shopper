@@ -7,12 +7,12 @@ import { useShopping } from "@/lib/shopping-store";
 export const Route = createFileRoute("/tracker")({
   head: () => ({
     meta: [
-      { title: "Price Tracker — PricePair" },
+      { title: "Price Tracker — ShopScout" },
       {
         name: "description",
         content: "Watch tracked products and see when Walmart or Target drops the price.",
       },
-      { property: "og:title", content: "Price Tracker — PricePair" },
+      { property: "og:title", content: "Price Tracker — ShopScout" },
       {
         property: "og:description",
         content: "Track price drops on the products you buy most.",

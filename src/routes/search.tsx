@@ -12,12 +12,12 @@ export const Route = createFileRoute("/search")({
   validateSearch: (s: Record<string, unknown>) => ({ q: typeof s.q === "string" ? s.q : "" }),
   head: () => ({
     meta: [
-      { title: "Search Results — PricePair" },
+      { title: "Search Results — ShopScout" },
       {
         name: "description",
         content: "Walmart and Target matches for your search, ranked by price and price per unit.",
       },
-      { property: "og:title", content: "Search Results — PricePair" },
+      { property: "og:title", content: "Search Results — ShopScout" },
       {
         property: "og:description",
         content: "Side-by-side Walmart and Target pricing for everyday products.",

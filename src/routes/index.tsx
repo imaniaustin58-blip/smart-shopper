@@ -8,13 +8,13 @@ import { PRODUCTS, POPULAR_SEARCHES } from "@/data/products";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "PricePair — Compare Walmart & Target Prices Instantly" },
+      { title: "ShopScout — Compare Walmart & Target Prices Instantly" },
       {
         name: "description",
         content:
           "Search everyday products and compare Walmart and Target prices side by side, with per-unit pricing, sale flags and smart savings tips.",
       },
-      { property: "og:title", content: "PricePair — Compare Walmart & Target Prices" },
+      { property: "og:title", content: "ShopScout — Compare Walmart & Target Prices" },
       {
         property: "og:description",
         content: "Find the cheapest store for your shopping list before you leave the house.",
@@ -36,7 +36,7 @@ function Index() {
   return (
     <AppShell>
       <div className="-mx-5 -mt-4 gradient-hero px-5 pb-8 pt-8 text-primary-foreground">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-80">PricePair</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-80">ShopScout</p>
         <h1 className="mt-2 font-display text-3xl font-semibold leading-tight">
           Know the cheaper store before you go.
         </h1>

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Trash2, ShoppingBasket, SplitSquareHorizontal } from "lucide-react";
+import { Trash2, ShoppingBasket, SquareSplitHorizontal as SplitSquareHorizontal } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { AssistantCard } from "@/components/AssistantCard";
 import { RetailerTag } from "@/components/RetailerTag";
@@ -9,13 +9,13 @@ import { useShopping } from "@/lib/shopping-store";
 export const Route = createFileRoute("/list")({
   head: () => ({
     meta: [
-      { title: "Shopping List Comparison — PricePair" },
+      { title: "Shopping List Comparison — ShopScout" },
       {
         name: "description",
         content:
           "See your estimated Walmart and Target totals, the cheapest store overall, and how much a split trip would save.",
       },
-      { property: "og:title", content: "Shopping List Comparison — PricePair" },
+      { property: "og:title", content: "Shopping List Comparison — ShopScout" },
       {
         property: "og:description",
         content: "Compare basket totals across Walmart and Target before you shop.",
