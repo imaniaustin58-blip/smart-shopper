@@ -122,6 +122,3 @@ export const searchWalmart = createServerFn({ method: "GET" })
       } satisfies WalmartLiveResponse;
     }
   });
-
-
-export { searchWalmart }
