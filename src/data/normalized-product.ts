@@ -1,4 +1,4 @@
-export type RetailerCode = "walmart" | "target" | "amazon" | "bestbuy";
+export type RetailerCode = "walmart" | "target" | "amazon" | "bestbuy" | "ebay";
 
 export type AvailabilityStatus = "in_stock" | "out_of_stock" | "limited" | "unknown";
 
