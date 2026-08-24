@@ -1,4 +1,36 @@
 import type { WalmartLiveResponse, WalmartLiveResult } from "@/data/walmart-types";
+import type { NormalizedProduct, RetailerSearchResponse } from "@/data/normalized-product";
+
+export function normalizeWalmartResult(result: WalmartLiveResult): NormalizedProduct {
+  return {
+    retailer: "walmart",
+    retailerProductId: result.productId,
+    productName: result.title,
+    brand: null,
+    modelNumber: null,
+    upc: null,
+    sku: result.productId,
+    currentPrice: result.price,
+    originalPrice: result.wasPrice,
+    imageUrl: result.image,
+    productUrl: result.productPageUrl,
+    affiliateUrl: null,
+    availability: result.availability === "Out of stock" ? "out_of_stock" : "in_stock",
+    shippingInfo: null,
+    pickupAvailable: null,
+    rating: result.rating,
+    reviewCount: result.reviews,
+    seller: result.seller,
+    lastChecked: new Date().toISOString(),
+  };
+}
+
+export function normalizeWalmartResponse(response: WalmartLiveResponse): RetailerSearchResponse {
+  return {
+    results: response.results.map(normalizeWalmartResult),
+    error: response.error,
+  };
+}
 
 interface SerpApiWalmartResult {
   us_item_id?: string;
